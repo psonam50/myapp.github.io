@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% block body %}
+   
+  
+  </h1>
+<div class="container">
+  <h2>Add a ToDo</h2>
+  <form action="/" method="POST">
+    <div class="mb-3">
+      <label for="title" class="form-label">ToDo title</label>
+      <input type="text" class="form-control"  name="title" id="title" aria-describedby="emailHelp">
+      <div id="emailHelp" class="form-text"> </div>
+    </div>
+    <div class="mb-3">
+      <label for="desc" class="form-label">ToDo description</label>
+      <input type="text" class="form-control" name="desc" id="desc">
+    </div>
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1">
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-dark">Submit</button>
+  </form>
+</div>
+<div class="container">
+  <h3>
+    add a ToDo
+  </h3>
+
+      {% if allToDo|length == 0 %}
+      <div class="alert alert-dark" role ="alert">
+         No todos found. Add your first todo
+      </div>
+
+                no record   
+      {% else %}                  
+ 
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">sno</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Description</th>
+                  <th scope="col">Time</th>
+                  <th scope="col">Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+      {% for todo in allToDo %}
+      <tr>
+                  <th scope="row">{{loop.index}}</th>
+                  <td>{{todo.title}}</td>
+                  <td>{{todo.desc}}</td>
+                  <td>{{todo.date_created}}</td>
+                  <td>
+                    <a href="/update/{{todo.sno}}"<button type="button" class="btn btn-outline-dark btn-sm mx-1">Update</button>
+                    <a href="/delete/{{todo.sno}}"<button type="button" class="btn btn-outline-dark btn-sm mx-1">Delete</button></td>
+                </tr> 
+                {% endfor %}
+              </tbody>
+            </table>
+     
+      {% endif %}
+
+
+</div>
+
+
+  <!-- Option 1: Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-JEW9xMcG8R+pH31jmWH6WWP0WintQrMb4s7ZOdauHnUtxwoG2vI5DkLtS3qm9Ekf"
+    crossorigin="anonymous"></script>
+
+  <!-- Option 2: Separate Popper and Bootstrap JS -->
+  <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js" integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js" integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous"></script>
+    -->
+{% endblock body %}
